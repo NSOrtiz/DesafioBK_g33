@@ -17,7 +17,7 @@ const schemaP = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 10, 
-        maxLength: 350,
+        maxLength: 500,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

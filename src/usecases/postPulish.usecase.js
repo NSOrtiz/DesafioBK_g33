@@ -1,4 +1,3 @@
-
 const postPublish = require('../models/postPublish.model');
 
 async function createPost(postData){
@@ -12,6 +11,11 @@ async function getAllPost(){
     return allPost;
 };
 
+async function getPostId(id){
+    const postById = await postPublish.findById(id);
+    return postById
+}
+
 async function updatePostById(id, newPostData){
     const updatedPost = await postPublish.findByIdAndUpdate(id, newPostData, {new: true});
     return updatedPost;
@@ -24,6 +28,7 @@ async function deletePostById(id){
 
 module.exports = {
     createPost,
+    getPostId,
     getAllPost,
     updatePostById,
     deletePostById,
