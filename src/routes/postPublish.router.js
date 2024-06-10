@@ -9,7 +9,6 @@ const router = express.Router();
 // Post /post/ auth
 router.post('/', auth, async (req, res)=>{
     try {
-
         const userId = await getIdToken(req, res);
         const postData = {...req.body, user: userId}
         const postCreate = await postUsecase.createPost(postData);
@@ -29,11 +28,20 @@ router.post('/', auth, async (req, res)=>{
 // Get /post 
 router.get('/', async (req, res)=>{
     try {
-        const posts = await postUsecase.getAllPost();
-        res.json({
-            success: true,
-            data: { posts },
-        });
+        const value = req.query.title;
+        if(!value){
+            const posts = await postUsecase.getAllPost();
+            res.json({
+                success: true,
+                data: { posts },
+            });
+        } else {
+            const posts = await postUsecase.getPostFilterTitle(value);
+                res.json({
+                    success: true,
+                    data: { posts },
+                });
+        }
     } catch (error) {
         res.status(error.status || 500);
         res.json({

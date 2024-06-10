@@ -11,10 +11,23 @@ async function getAllPost(){
     return allPost;
 };
 
+async function getPostFilterTitle(wordTitle){
+    try {
+        const filterPost = await postPublish.find({title: {$regex: wordTitle, $options:'i'}})
+        return filterPost
+    } catch (error) {
+        res.status(error.status || 500);
+        res.json({
+            success: false,
+            error: error.message
+        });
+    }
+};
+
 async function getPostId(id){
     const postById = await postPublish.findById(id);
     return postById
-}
+};
 
 async function updatePostById(id, newPostData){
     const updatedPost = await postPublish.findByIdAndUpdate(id, newPostData, {new: true});
@@ -29,6 +42,7 @@ async function deletePostById(id){
 module.exports = {
     createPost,
     getPostId,
+    getPostFilterTitle,
     getAllPost,
     updatePostById,
     deletePostById,
