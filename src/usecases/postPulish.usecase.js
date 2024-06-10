@@ -30,6 +30,7 @@ async function getPostId(id){
 };
 
 async function updatePostById(id, newPostData){
+    newPostData.updated_at = new Date();
     const updatedPost = await postPublish.findByIdAndUpdate(id, newPostData, {new: true});
     return updatedPost;
 };

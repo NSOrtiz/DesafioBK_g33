@@ -2,7 +2,6 @@ const createError = require('http-errors');
 const encrypt = require('../lib/encrypt');
 const Users = require('../models/user.model');
 
-
 async function createUser(userData){
     const userFound = await Users.findOne({email: userData.email});
     if(userFound){
@@ -20,6 +19,7 @@ async function getUserById(id){
 }
 
 async function updateUserById(id, newUserData){
+    newUserData.updated_at = new Date();
     const updateUser = await Users.findByIdAndUpdate(id, newUserData, {new: true});
     return updateUser;
 }
