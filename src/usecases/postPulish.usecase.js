@@ -1,9 +1,16 @@
 const postPublish = require('../models/postPublish.model');
 
 async function createPost(postData){
-    
-    const newPost = await postPublish.create(postData);
-    return newPost;
+    try {
+        console.log(postData)
+        const newPost = await postPublish.create(postData);
+        console.log(newPost)
+        return newPost;
+        
+    } catch (error) {
+        console.error("Error creando el post:", error);
+        throw new Error("No se pudo crear el post. Inténtalo de nuevo.");
+    }
 };
 
 async function getAllPost(){

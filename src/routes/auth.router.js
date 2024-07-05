@@ -10,11 +10,13 @@ router.post('/login', async (req, res)=>{
             success: true,
             data: {token}
         });
+        console.log('a')
     } catch (error) {
         res.status(error.status || 500)
         res.json({
             error: error.message,
         });
+        console.log('b')
     }
 });
 

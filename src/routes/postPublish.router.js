@@ -9,18 +9,23 @@ const router = express.Router();
 router.post('/', auth, async (req, res)=>{
     try {
         const userId = await getIdToken(req, res);
+        //console.log(userId)
         const postData = {...req.body, user: userId}
+        //console.log(postData)
         const postCreate = await postUsecase.createPost(postData);
+        console.log(postCreate)
         res.json({
             success:true,
             data: {post: postCreate}
         })
+        console.log('1a')
     } catch (error) {
         res.status(error.status || 500);
         res.json({
             success: false,
             error: error.message
         });
+        console.log('2b')
     }
 })
 
@@ -33,6 +38,7 @@ router.get('/', async (req, res)=>{
                 success: true,
                 data: { posts },
             });
+            console.log('3c')
         } else {
             const posts = await postUsecase.getPostFilterTitle(value);
                 res.json({
@@ -46,6 +52,7 @@ router.get('/', async (req, res)=>{
             success: false,
             error: error.message
         });
+        console.log('4d')
     };
 });
 
