@@ -13,12 +13,14 @@ router.post('/', async (req, res)=>{
             success: true,
             data: {user: userCreate}
         });
+        console.log('1')
     } catch (error) {
         res.status(error.status || 500);
         res.json({
             success: false,
             error: error.message
         });
+        console.log('2')
     };
 });
 
@@ -30,12 +32,14 @@ router.get('/:id', auth, async (req, res)=>{
             success: true,
             data: { user },
         })
+        console.log('3')
     } catch (error) {
         res.status(error.status || 500);
         res.json({
             success: false,
             error: error.message
         });
+        console.log('4')
     };
 });
 
