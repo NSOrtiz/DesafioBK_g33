@@ -29,6 +29,25 @@ router.post('/', auth, async (req, res)=>{
     }
 })
 
+router.get('/:id', async(req, res)=>{
+    try {
+        const {id} = req.params;
+        const post = await postUsecase.getPostId(id);
+        res.json({
+            success: true,
+            data: { post },
+        });
+
+    } catch (error) {
+        res.status(error.status || 500);
+        res.json({
+            success: false,
+            error: error.message
+        });
+        
+    }
+})
+
 router.get('/', async (req, res)=>{
     try {
         const value = req.query.title;
