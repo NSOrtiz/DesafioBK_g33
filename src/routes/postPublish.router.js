@@ -33,6 +33,11 @@ router.get('/:id', async(req, res)=>{
     try {
         const {id} = req.params;
         const post = await postUsecase.getPostId(id);
+
+        if (!post) {
+            throw createError(404, 'Post not found');
+        }
+        
         res.json({
             success: true,
             data: { post },

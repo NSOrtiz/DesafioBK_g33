@@ -32,7 +32,7 @@ async function getPostFilterTitle(wordTitle){
 };
 
 async function getPostId(id){
-    const postById = await postPublish.findById(id);
+    const postById = await postPublish.findById(id).populate('user');
     return postById
 };
 
